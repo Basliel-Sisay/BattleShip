@@ -7,28 +7,40 @@ class Gameboard{
         }
         this.board = grid;
         this.Ship =[];
+        this.positions=[];
     }
     placeShip(ship , row ,column , isvertical){
         if(board[row][column] === null){
             if(isvertical ){
-                if(column + ship.length> 10){
+                if(row + ship.length> 10){
                     return false;
                 }
                 for(let i=0; i<ship.length;i++){
-                    if(this.board[row][column + i] !== null){
+                    if(this.board[row+ i][column ] !== null){
                         return false;
                     }
-                    this.board[row][column+i] = ship;
                 }
+                for (let i = 0; i < ship.length; i++) {
+                    this.board[row + i][column] = ship;
+                    this.positions.push({ row: row + i, column: column });
+                  }
+
                 }
                 else{
-                    if(row+ ship.length > 10){
+                    if(column + ship.length > 10){
                         return false;
                     }
+                    for (let i = 0; i < ship.length; i++) {
+                        if (this.board[row][column + i] !== null) {
+                          return false; // another ship is in the way
+                        }
+                      }
                     for(let i=0; i<ship.length;i++){
-                        this.board[row+i][column]=ship;
+                        this.board[row][column+i]=ship;
+                        this.positions.push({ row: row, column: column + i });
                     }
                 }
+                return true;
             }
         }
 }
