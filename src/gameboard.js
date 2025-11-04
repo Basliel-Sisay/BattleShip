@@ -11,6 +11,7 @@ class Gameboard{
         this.ships =[]; //stores all the ships placed on the board
         this.positions=[];// checks the coordinate of all the ships that will be on the board
         this.missed=[]; //it tracks the missed attacks on the ships
+        this.allAttack=[];// it tracks all the attacks made on the ships both missed and hit.
     }
     placeShip(ship , row ,column , isvertical){
         if(row<0 || row>=10 || column <0 || column >= 10){// it won't responed to attacks that are outside of the 10x10 grid or outside of the board
@@ -53,8 +54,20 @@ class Gameboard{
                     return false;
                 }
                 const target = this.board[row][column]; //stores the object at the target cell
+    
+                const alreadyAttacked=this.allAttack.some(attack=>
+                    attack.row === row && attack.column === column
+                );
+                // We check the allAttack array and if our attack is in there we return false.
+                if(alreadyAttacked){return false;}
+                //If our attack is not in the allAttack array we push it so that it gets recorded.
+                this.allAttack.push({'row':row , 'column':column});
+
                 if(target === null){
-                    this.missed.push({row , column});
+                    // Fixed the object format cause in javascript an object must be in key:value pair;
+                    // It was {row,column} before now it is {'row':row , 'column':column}
+                    this.missed.push({'row':row , 'column':column});
+                    
                     return false;// if there is no ship, store the missed ones and return false so that the player won't try for the missed ships again to think of it as target
                 }
                 target.hit();//if the ships is there and got hit return true and make it known that it actually got hit
