@@ -24,8 +24,8 @@ describe('Gameboard',function(){
 
 
   // Test 2:Checks that when we place our ships if we enter an out of bound row or column it returns false.
-  test('Checks if it returns false when we try to place ships ot of bound.',function (){
-    expect(myBoard.placeShip(myShip,11,2,true)).toBe(false);
+  test('Checks if it returns false when we try to place ships out of bound.',function (){
+    expect(myBoard.placeShip(myShip,9,2,true)).toBe(false);
   });
 
 
@@ -72,7 +72,7 @@ describe('Gameboard',function(){
 
   //Test 7: Checks if false is returned if an attack was already made at that point inorder not to repeat it.
   // and if the new attack is recorded properly in our allAttack array.
-   test('Checks if false is returned if an attack was already made at that point amd if the new attack is recorded successfully',function (){
+   test('Checks if false is returned if an attack was already made at that point and if the new attack is recorded successfully',function (){
      //We first place the ship vertically starting from (1,5) to (4,5).
      myBoard.placeShip(myShip,1,5,true) ;
      // We the attack at the (1,3) coordinate.
@@ -102,7 +102,7 @@ describe('Gameboard',function(){
     // Its currently 0 so it must increase to 1.
     myBoard.attack(1,3);
     expect(myBoard.board[1][3].hits).toBe(1);
-    //We attack the second ship and ecpect true to be returned.
+    //We attack the second ship and expect true to be returned.
     expect( myBoard.attack(3,1)).toBe(true);
   });
 
