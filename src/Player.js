@@ -1,11 +1,11 @@
-import Gameboard from './gameboard.js';
-const player={
+import {Gameboard} from './gameboard.js';
+export const player={
     board : new Gameboard(),
     attack(computer , row, column){
         return computer.board.attack(row,column);
     }
 };
-const computer ={
+export const computer ={
     board: new Gameboard(),
     attacked:[],
     attack(player){
