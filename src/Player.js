@@ -1,19 +1,20 @@
-import {Gameboard } from './gameboard.js';
- export const player={
+import Gameboard from './gameboard.js';
+const player={
     board : new Gameboard(),
     attack(computer , row, column){
         return computer.board.attack(row,column);
     }
 };
- export const computer ={
+const computer ={
     board: new Gameboard(),
     attacked:[],
     attack(player){
-        let row, column;
+        let row;
+        let column;
         let trial = true;
         while(trial === true){
-            row = Math.floor(Math.random()*10) +1;
-            column = Math.floor(Math.random()*10) +1;
+            row = Math.floor(Math.random()*10) ;
+            column = Math.floor(Math.random()*10) ;
             //so that it can hit column and rows randomly
             const move = row + ',' + column;
             trial = false;
@@ -28,3 +29,4 @@ import {Gameboard } from './gameboard.js';
         return player.board.attack(row,column);
     }
 }
+
