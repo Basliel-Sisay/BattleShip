@@ -34,4 +34,6 @@ test('check if the ship sinks after getting hit the length times', function(){
     //return true because it got hit 3 times , it is 3 because in our instance we said new Ship(3) so the length in our test case is 3
     expect(ships.sunk()).toBe(true);
 });
+
+
 });

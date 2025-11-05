@@ -44,6 +44,7 @@ class Gameboard{
                         //(constant row with consecutive column)
                         this.board[row][column+i]=ship;
                         this.positions.push({ row: row, column: column + i });
+    
                     }
                 }
                 this.ships.push(ship); //storing the placed ships
