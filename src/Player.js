@@ -1,4 +1,5 @@
 import {Gameboard} from './gameboard.js';
+import {Ship} from './ship.js';
 export const player={
     board : new Gameboard(),
     attack(computer , row, column){
@@ -27,6 +28,20 @@ export const computer ={
         }
         this.attacked.push(row +','+ column);
         return player.board.attack(row,column);
-    }
+       
+    },
+    placement(){
+        const shiplen = [5,4,3,3,2];
+        for(let i=0; i<shiplen; i++) {
+            const ship = new Ship(shiplen[i]);
+            let placing = false;
+            while(placing === false){
+                const row = Math.floor(Math.random()*10);
+                const column  = Math.floor(Math.random()*10);
+                const isvertical = Math.random() > 0.5;
+                placing = this.board.placeShip(ship, row , column , isvertical);
+            }
+        }
+     }
 }
 
