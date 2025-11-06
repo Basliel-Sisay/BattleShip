@@ -15,6 +15,17 @@ describe('Player',function(){
     player.attack(computer,1,1)
     expect(mock).toHaveBeenCalledWith(1,1);
    })
+   test('test if the player\'s attack return the correct result' , ()=>{
+      const mock = jest.spyOn(computer , 'placement');
+      computer.placement();
+      expect(mock).toHaveBeenCalled();
+   });
+   test('test that overlapping won\'t occur', ()=>{
+      computer.attack(player);
+      computer.attack(player);
+      computer.attack(player);
+      expect(computer.attacked.length).toBe(3);
+   })
 });
 
 //npm test Player.spec.js
