@@ -82,5 +82,12 @@ class Gameboard{
                 }
                 return true;// if all the ships are sunk then return true and call the game over 
             }
+            emptyGrid(){
+                const grid = [];
+                for(let i =0; i<10; i++){
+                    grid.push(new Array(10).fill(null));
+                }
+                return grid;
+            }
         }
         export{Gameboard};
