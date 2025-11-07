@@ -9,5 +9,5 @@ test('test if when the game reset\'s there is a new board created' , function(){
     expect(computer.board).toBeTruthy();
 });
 test('test if computer is not the stating player.', function(){
-    expect(gameReset(player, computer, 'current')).not.toBe('computer');
+    expect(gameReset(player, computer, 'player')).not.toBe('computer');
 });
