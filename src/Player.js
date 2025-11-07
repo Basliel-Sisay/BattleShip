@@ -32,7 +32,7 @@ export const computer ={
     },
     placement(){
         const shiplen = [5,4,3,3,2];
-        for(let i=0; i<shiplen; i++) {
+        for(let i=0; i<shiplen.length; i++) {
             const ship = new Ship(shiplen[i]);
             let placing = false;
             while(placing === false){
