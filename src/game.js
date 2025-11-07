@@ -1,8 +1,9 @@
 import { Gameboard} from "./gameboard";
-import { Ship } from "./ship";
+import { Ship } from "./ship.js";
 import {player, computer} from './Player.js';
+computer.placement();
 let current = 'player';
-function turn(row, column){
+export function turn(row, column){
     const final = player.attack(computer , row, column);
     if(computer.board.gameOver()=== true){
         console.log('the computer loses');
@@ -18,4 +19,13 @@ function turn(row, column){
             console.log('the computer wins');
         }
     }}, 1000); 
+}
+
+export function gameReset(player, computer, current){
+    computer.board = new Gameboard();
+    computer.attacked = [];
+    player.board= new Gameboard();
+    current = 'player';
+    return current;
+
 }
