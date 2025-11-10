@@ -24,6 +24,7 @@ export function turn(row, column){
 export function gameReset(player, computer, current){
     computer.board = new Gameboard();
     computer.attacked = [];
+    computer.placement();
     player.board= new Gameboard();
     current = 'player';
     return current;
