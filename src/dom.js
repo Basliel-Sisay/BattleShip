@@ -1,7 +1,7 @@
 import { Gameboard } from "./gameboard.js";
 import { computer, player } from "./Player";
-import { turn } from "./game.js";
-function display(board,ContainersId ,show){ // board is the instance of Gameboard that got like the game state
+import { turn,current,gameReset } from "./game.js";
+function display(board, show){ // board is the instance of Gameboard that got like the game state
     if(show === undefined){// show is the variable that shows ships basically it is true for player board and false for the computer board
         show = true; //the ships will be visisble
     }
