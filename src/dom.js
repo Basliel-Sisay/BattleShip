@@ -11,7 +11,8 @@ function display(board, show){ // board is the instance of Gameboard that got li
         for(let column =0; column<10;column++){
             const box = document.createElement('div');// a div container that represent one box on the board
             box.classList.add('box'); // this is added to later style it in our css file
-            box.dataset.row = row; // we will attach data-row and column attributes to the box like (<div class="box" data-row="3" data-col="7"></div>)
+            box.dataset.row = row; // we will attach data-row and column attributes to the box
+            //  like (<div class="box" data-row="3" data-column="7"></div>)
             box.dataset.column=column;
             const gotAttacked = board.allAttack.some(place => place.row ===row && place.column === column); // check if the box is attacked and it will return true if it does
             const gotMissed = board.missed.some(place => place.row === row && place.column === column); // check if the box is missed
@@ -47,4 +48,18 @@ function movement(row , column){
         }
     ]
     boards.forEach(access=> display(access.board , access.show));// access it through calling the display function which contain board and show parameters
+}
+function boardResponse(){
+    const container = document.querySelector('#gameHolder'); //this is later in the html will contain our computer board
+    container.addEventListener('click', function(e){
+        const box = e.target;
+        if(!box.classList.contains('box')){ // if the clicked doesn't have a class name box ignore it (see line 13 we added box class name to it)
+            return;
+        }
+        const row = parseInt(box.dataset.row);//as the example i gave you in line 15 the dataset contain a string not a number like data-row="2" is a string
+        //so what we gon do is change that string into a number because 
+        // in the gameboard.js our attack method evaluates number not stings you can go back and see attack method on line 53
+        const column = parseInt(box.dataset.column);
+        movement(row,column); // return the changed column and row to the movement handler method
+    });
 }
