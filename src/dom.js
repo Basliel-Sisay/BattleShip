@@ -1,11 +1,11 @@
 import { Gameboard } from "./gameboard.js";
 import { computer, player } from "./Player";
 import { turn } from "./game.js";
-function display(board, show){ // board is the instance of Gameboard that got like the game state
+function display(board,ContainersId ,show){ // board is the instance of Gameboard that got like the game state
     if(show === undefined){// show is the variable that shows ships basically it is true for player board and false for the computer board
         show = true; //the ships will be visisble
     }
-    const container = document.querySelector('#gameHolder');//this is just what we will have in our html file in the future
+    const container = document.querySelector(ContainersId);//this is just what we will have in our html file in the future
     container.innerHTML =''; // clear our container to not overlap or stack many boards on top of each other we will clear it
     for(let row = 0; row<10;row++){// loop through the grid
         for(let column =0; column<10;column++){
@@ -50,7 +50,7 @@ function movement(row , column){
     boards.forEach(access=> display(access.board , access.show));// access it through calling the display function which contain board and show parameters
 }
 function boardResponse(){
-    const container = document.querySelector('#gameHolder'); //this is later in the html will contain our computer board
+    const container = document.querySelector('#computerBoard'); //this is an id that will later be in the html which containes our computer board
     container.addEventListener('click', function(e){
         const box = e.target;
         if(!box.classList.contains('box')){ // if the clicked doesn't have a class name box ignore it (see line 13 we added box class name to it)
@@ -63,3 +63,13 @@ function boardResponse(){
         movement(row,column); // return the changed column and row to the movement handler method
     });
 }
+function boardMovement(){
+    display(player.board, '#playerBoard', true);//calling on the function passing the right parameter on whether to show the ships or not
+    display(computer.board, '#computerBoard', false);
+}
+document.addEventListener('DOMContentLoaded', function(){//this will start the game after the UI is loaded
+    computer.placement();//we will call placement to randomly place the computer's ships
+    boardMovement();//this will make our player board to be seen and the computer to be hide when the game starts
+    boardResponse();//we call on the function where we gave event listener to the computer's board container so like we can click on it and in every click movement function will run 
+    // because we already called it inside the boardResponse() function with row and column
+})
