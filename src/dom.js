@@ -1,11 +1,11 @@
 import { Gameboard } from "./gameboard.js";
 import { computer, player } from "./Player";
-import { turn } from "./game.js";
-function display(board,ContainersId ,show){ // board is the instance of Gameboard that got like the game state
+import { turn,current,gameReset } from "./game.js";
+function display(board, show){ // board is the instance of Gameboard that got like the game state
     if(show === undefined){// show is the variable that shows ships basically it is true for player board and false for the computer board
         show = true; //the ships will be visisble
     }
-    const container = document.querySelector(ContainersId);//this is just what we will have in our html file in the future
+    const container = document.querySelector('#gameHolder');//this is just what we will have in our html file in the future
     container.innerHTML =''; // clear our container to not overlap or stack many boards on top of each other we will clear it
     for(let row = 0; row<10;row++){// loop through the grid
         for(let column =0; column<10;column++){
@@ -50,7 +50,7 @@ function movement(row , column){
     boards.forEach(access=> display(access.board , access.show));// access it through calling the display function which contain board and show parameters
 }
 function boardResponse(){
-    const container = document.querySelector('#computerBoard'); //this is an id that will later be in the html which containes our computer board
+    const container = document.querySelector('#gameHolder'); //this is later in the html will contain our computer board
     container.addEventListener('click', function(e){
         const box = e.target;
         if(!box.classList.contains('box')){ // if the clicked doesn't have a class name box ignore it (see line 13 we added box class name to it)
